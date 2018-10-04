@@ -1,0 +1,153 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Movie API",
+        "contact": {
+            "email": "lllllexxxxx@gmail.com"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/movie/create": {
+            "post": {
+                "tags": [
+                    "фильм"
+                ],
+                "summary": "Создание фильма",
+                "description": "",
+                "operationId": "actionCreate",
+                "parameters": [
+                    {
+                        "name": "access-token",
+                        "in": "path",
+                        "description": "Access token",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "description": "Навание нового фильма",
+                                        "type": "string"
+                                    },
+                                    "user_id": {
+                                        "description": "Id пользователя",
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Фильм был создан"
+                    },
+                    "422": {
+                        "description": "Недостаточно данных для создания фильма"
+                    }
+                }
+            }
+        },
+        "/movie/add-favorite": {
+            "post": {
+                "tags": [
+                    "фильм",
+                    "избранное"
+                ],
+                "summary": "Добавить фильм в избранное",
+                "description": "",
+                "operationId": "actionAddFavorite",
+                "parameters": [
+                    {
+                        "name": "access-token",
+                        "in": "path",
+                        "description": "Access token",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "movie_id": {
+                                        "description": "Id фильма",
+                                        "type": "integer"
+                                    },
+                                    "user_id": {
+                                        "description": "Id пользователя",
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Фильм был добавлен в избранное"
+                    },
+                    "200": {
+                        "description": "Фильм уже был добавлен в избранное"
+                    },
+                    "422": {
+                        "description": "Недостаточно данных для добавления фильма в избранное"
+                    }
+                }
+            }
+        },
+        "/movie/not-favorite-list": {
+            "get": {
+                "tags": [
+                    "фильм",
+                    "избранное"
+                ],
+                "summary": "Получение перечня фильмов для пользователя, которые исключают фильмы добавленные в избранное",
+                "description": "",
+                "operationId": "actionNotFavoriteList",
+                "parameters": [
+                    {
+                        "name": "access-token",
+                        "in": "path",
+                        "description": "Access token",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "User Id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Список фильмов, которые исключают фильмы добавленные в избранное"
+                    },
+                    "400": {
+                        "description": "Недостаточно данных о пользователе"
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,75 @@
+php init
+Development mode - 0
+common/config/main-local.php - указываем базу данных
+yii migrate init
+php yii migrate --migrationPath=@yii/rbac/migrations
+php yii rbac/init
+
+
+http://api.movies.local/v1/auth/login
+method: post
+data:
+username: user
+password: user@
+response:
+{"status": "success",
+"message": "login success!","data": {"id": 2,
+"username":"user","token":"fSHT6aE5blrAdObj8UYDrGvvez04RIj"}
+}
+
+http://api.movies.local/v1/movie/create?access-token={token}
+method: post
+body patams: name, user_id
+error: [{"field":"name","message":"Name cannot be blank."},{"field":"user_id","message":"User ID cannot be blank."}]
+response:
+{
+    "name": "new",
+    "user_id": "2",
+    "id": 4
+}
+
+
+http://api.movies.local/v1/movie/add-favorite?access-token={token}
+method: post
+body patams: movie_id, user_id
+error: [{"field":"name","message":"Name cannot be blank."},{"field":"user_id","message":"User ID cannot be blank."}]
+response:
+{
+    "movie_id": "4",
+    "user_id": "2",
+    "id": 2
+}
+
+
+http://api.movies.local/v1/movie/not-favorite-list?access-token=fSHT6aE5blrAdObj8UYDrGvvez04RIj
+method: get
+[
+    {
+        "id": 1,
+        "name": "Втеча з Шоушенка",
+        "description": "«Втеча з Шоушенка» (англ. The Shawshank Redemption; слово «redemption» може мати значення «порятунок», «звільнення», «спокута») — американський фільм-драма 1994, знятий режисером Френком Дарабонтом за повістю Стівена Кінга «Ріта Гейворт і втеча з Шоушенка» (англ. Rita Hayworth and Shawshank Redemption). Станом на 14 жовтня 2017 року фільм займає 1-е місце у рейтингу фільмів за версією IMDb.",
+        "year": 1994,
+        "created_at": 123123,
+        "user_id": 2
+    },
+    {
+}, ...
+]
+
+
+http://api.movies.local/v1/movies?access-token={token}
+method: get
+desc: получение перечня фильмов для пользователя, которые исключают фильмы добавленные в избранное
+response:
+[
+  {
+	"id":1,
+	"name": {string},
+	"description": {text},
+	"year": {int},
+	"created_at": {int},
+	"user_id": {int}
+  },
+  {...}.
+  ...
+]
