@@ -1,9 +1,11 @@
-php init
-Development mode - 0
-common/config/main-local.php - изменить конфигурацию бд
-yii migrate init
-php yii migrate --migrationPath=@yii/rbac/migrations
-php yii rbac/init
+Инструкция <br/><br/>
+
+php init <br/>
+Development mode - 0 <br/>
+common/config/main-local.php - изменить конфигурацию бд <br/>
+yii migrate init <br/>
+php yii migrate --migrationPath=@yii/rbac/migrations <br/>
+php yii rbac/init <br/><br/>
 
 swagger json - api/documentation/openapi.json
 
